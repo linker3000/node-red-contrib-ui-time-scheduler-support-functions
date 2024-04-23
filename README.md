@@ -7,7 +7,7 @@ Here's some support functions I wrote for the Node-RED timer module *node-red-co
 
 ### Updating the timer save file
 
-**This applies to node-red-contrib-ui-time-scheduler V1.17.2 and below**
+**This applies to node-red-contrib-ui-time-scheduler V1.17.2 and below.**
 
 To use functions or code that modify the timer's settings, the timer node needs to keep a copy of its settings in a saved file, as explained here: [https://flows.nodered.org/node/node-red-contrib-ui-time-scheduler](https://github.com/fellinga/node-red-contrib-ui-time-scheduler?tab=readme-ov-file#restoring-schedules-after-a-reboot), however one additional change to the flow is needed because the top output only sends out the current config if the timer's settings are changed via the dashboard, not if they are injected into the node. The change is as below, where we write the new config to the save file directly from the output of any of the new functions used from here:
 
