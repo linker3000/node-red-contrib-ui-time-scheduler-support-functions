@@ -1,4 +1,4 @@
-# node-red-contrib-ui-time-scheduler-support-functions
+# node-red-contrib-ui-time-scheduler Support Functions
 Possibly handy functions and code for use with node-red-contrib-ui-time-scheduler.
 
 Everything here is offered 'as is' with no claims made about fitness for any specific purpose. Feel free to offer suggestions for improvements.
