@@ -10,7 +10,7 @@ NB: To use functions or code that modify the timer's settings, the timer node ne
 ![node structure](https://github.com/linker3000/node-red-contrib-ui-time-scheduler-support-functions-/assets/19429471/c21a7b90-1388-4333-bf2d-7babd3673cc1)
 
 ## Timer Cascade (Duplicate first timer)
-Reads the settings for timer 0 and duplicates them to all other timers, overwriting all other settings. See the function's code and Adjust the loop value for 
+Reads the settings for timer 0 and duplicates them to all other timers, overwriting all other settings. See the function's code and adjust the loop value for 
 to match your number of outputs.
 
 ## Clear All
