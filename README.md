@@ -1,4 +1,4 @@
-# node-red-contrib-ui-time-scheduler-support-functions-
+# node-red-contrib-ui-time-scheduler-support-functions
 Possibly handy functions for use with node-red-contrib-ui-time-scheduler
 
 Here's some support functions I wrote for the Node-RED timer module *node-red-contrib-ui-time-scheduler*, which can be found here: https://flows.nodered.org/node/node-red-contrib-ui-time-scheduler.
