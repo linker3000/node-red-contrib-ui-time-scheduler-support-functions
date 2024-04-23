@@ -1,0 +1,48 @@
+/*
+
+Timer-cascade
+
+V1.0 N. Kendrick 14-Apr-2024 (linker3000@gmail.com)
+
+For node-red-contrib-ui-time-scheduler
+
+Read the settings for output 0 and duplicate them for the other outputs.
+The resulting payload can be loaded into the timer and/or saved to a config file.
+
+No warranties, use at your own risk etc..
+
+No formal support.
+
+MIT Licence
+
+*/
+
+// Read the config file in the msg payload. Exit gracefully if it's empty
+// or invalid.
+try {
+var jsonData = JSON.parse(msg.payload);} catch (e) {
+  return [null];
+}
+
+// Filter the timers array to keep only objects where output is "0"
+const filteredTimers = jsonData.timers.filter(timer => timer.output === "0");
+
+// This copies output 0 to outputs 1-4 (i <= 5). Adjust the loop value for 
+// different numbers of outputs.
+const copiedTimers = [];
+filteredTimers.forEach((timer, index) => {
+  for (let i = 1; i <= 5; i++) {
+    const copy = { ...timer };
+    copy.output = i.toString();
+    copiedTimers.push(copy);
+  }
+});
+
+// Construct the new payload with the modified timers array
+const newPayload = {
+  "timers": filteredTimers.concat(copiedTimers),
+  "settings": jsonData.settings
+};
+
+msg.payload = JSON.stringify(newPayload);
+return msg;
