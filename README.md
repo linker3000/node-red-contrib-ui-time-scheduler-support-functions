@@ -9,18 +9,16 @@ NB: To use functions or code that modify the timer's settings, the timer node ne
 
 ![node structure](https://github.com/linker3000/node-red-contrib-ui-time-scheduler-support-functions-/assets/19429471/c21a7b90-1388-4333-bf2d-7babd3673cc1)
 
-## Timer Cascade (Duplicate first timer)
+## Cascade (Duplicate first timer)
 Reads the settings for timer 0 and duplicates them to all other timers, overwriting all other settings. See the function's code and adjust the loop value for 
 to match your number of outputs.
+
+## Check Tomorrow
+
+When fed with the contents of the saved timer config, it outputs a true/false if any timers are set to come on 'tomorrow'. The first output covers all timers and there's also separate outputs for each timer so you can, for example, have 'LED' indicators for them. *This function does not need to re-save the setup config. Adjust the number of function outputs and the code to suit your setup.* 
 
 ## Clear All
 
 This code is designed to be used as the payload for a push button; it loads an empty setup into the timer, effectively erasing all timers.
 
 ``{"timers":[],"settings":{"disabledDevices":[],"overviewFilter":"enabled"}}``
-
-## Check Tomorrow
-
-When fed with the contents of the saved timer config, it outputs a true/false if any timers are set to come on 'tomorrow'. The first output covers all timers and there's also separate outputs for each timer so you can, for example, have 'LED' indicators for them. *This function does not need to re-save the setup config. Adjust the number of function outputs and the code to suit your setup.* 
-
-
