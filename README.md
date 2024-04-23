@@ -19,6 +19,6 @@ When fed with the contents of the saved timer config, it outputs a true/false if
 
 ## Clear All
 
-This code is designed to be used as the payload for a push button; it loads an empty setup into the timer, effectively erasing all timers.
+This code is designed to be used as the payload for a push button; it loads an empty setup into the node, effectively erasing all timers.
 
 ``{"timers":[],"settings":{"disabledDevices":[],"overviewFilter":"enabled"}}``
