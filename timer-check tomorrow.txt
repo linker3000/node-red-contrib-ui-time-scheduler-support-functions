@@ -1,0 +1,58 @@
+/*
+
+Timer-check-tomorrow
+
+V1.0 N. Kendrick 15-Mar-2024
+
+For node-red-contrib-ui-time-scheduler
+
+Check all timer settiings in the saved json config file for enabled timers set 
+to switch on tomorrow.
+
+Pass a read of the saved config file into this procedure (comes in as the msg.payload)
+
+No warranties, use at your own risk etc..
+
+No formal support.
+
+MIT Licence
+
+*/
+
+try {
+var jsonData = JSON.parse(msg.payload);} catch (e) {
+  return [null, null, null, null, null, null];
+}
+
+var msg2 = {payload: false};
+var msg3 = {payload: false};
+var msg4 = {payload: false};
+var msg5 = {payload: false};
+var msg6 = {payload: false};
+
+var led = [false, false, false, false, false];
+var i = 0;
+const timers = jsonData.timers;
+const tomorrow = (new Date().getDay() + 1) % 7;
+msg.payload = false;
+
+//Array of disbled timers/devices...
+const devDisabled = jsonData.settings?.disabledDevices;
+
+timers.forEach(timer => {
+    //node.warn ("i is : " + i);
+    if ((timer.days[tomorrow] == 1) && !(timer?.disabled == "disabled")
+    && (!devDisabled.includes(timer.output))) {
+          msg.payload = true;
+          led[timer.output] = true;
+        };
+     i++;   
+});
+
+msg2.payload = led[0];
+msg3.payload = led[1];
+msg4.payload = led[2];
+msg5.payload = led[3];
+msg6.payload = led[4];
+
+return [msg, msg2, msg3, msg4, msg5, msg6];
