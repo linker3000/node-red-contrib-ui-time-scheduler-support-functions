@@ -1,0 +1,59 @@
+/*
+
+Boost On
+
+V1.0 N. Kendrick 23-Apr-2024 (linker3000@gmail.com)
+
+For node-red-contrib-ui-time-scheduler
+
+Add a 2hr boost to the stated timer number
+
+Call as: [Trigger with msg.topic = timer #] -> [Read config file] ->
+  [This function]
+
+This means that the function is called with:
+
+msg.topic = timer number
+msg.payload = contents of timer config file
+
+See notes at:
+
+https://github.com/linker3000/node-red-contrib-ui-time-scheduler-support-functions
+
+No warranties, use at your own risk etc..
+
+No formal support.
+
+MIT Licence
+
+*/
+
+try {
+var jsonData = JSON.parse(msg.payload);} catch (e) {
+  return [null];
+}
+
+const now = new Date();
+
+// Calculate end time as now + 2 hours. ** Adjust for your needs **
+const endTime = new Date(now.getTime() + (2 * 60 * 60 * 1000));
+
+// Get current day of the week (0 for Sunday, 1 for Monday, ..., 6 for Saturday)
+const currentDayOfWeek = now.getDay();
+
+// Create a dynamic days array with 0s except for the current day, which is set to 1
+const days = Array.from({ length: 7 }, (_, i) => i === currentDayOfWeek ? 1 : 0);
+
+// Create a new entry for output "0" with start time as now and end time as now + 2 hours
+const newEntry = {
+  "starttime": now.getTime(),
+  "days": days,
+  "output": msg.topic,
+  "endtime": endTime.getTime(),
+  "mode": "boost"
+};
+// Add the new entry to the timers array
+jsonData.timers.push(newEntry);
+msg.payload = JSON.stringify(jsonData);
+    
+return msg;
