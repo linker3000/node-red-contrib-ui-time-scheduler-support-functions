@@ -40,7 +40,6 @@ msg.payload = false;
 const devDisabled = jsonData.settings?.disabledDevices;
 
 timers.forEach(timer => {
-    //node.warn ("i is : " + i);
     if ((timer.days[tomorrow] == 1) && !(timer?.disabled == "disabled")
     && (!devDisabled.includes(timer.output))) {
           msg.payload = true;
