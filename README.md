@@ -55,7 +55,7 @@ Use as follows:
 
 ### Enable / Disable Settings
 
-Enable or disable all the settings for every timer. See the function comments for more info
+Enable or disable all the settings for every timer. See the function comments for more info.
 
 ### Enable / Disable Timer
 
@@ -64,6 +64,8 @@ Enable or disable one or more timer outputs (not the settings therein). See the 
 ### Who's Disabled
 
 Returns true/false values to indicate whether timer outputs are disabled - handy because the timer module does not have indicators for this.
+
+*This functon needs editing to match the number of timers that need checking - see the comments in the file.*
 
 ### Clear All
 
