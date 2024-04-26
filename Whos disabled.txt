@@ -7,7 +7,7 @@ V1.0 N. Kendrick 25-Apr-2024 (linker3000@gmail.com)
 For node-red-contrib-ui-time-scheduler
 
 Read in the current config file and provide a true/false value
-according to whether the timer output is disabled.
+according to whether a timer output is disabled.
 
 Call as: [Trigger] -> [Read config file] ->
   [This function]
@@ -18,9 +18,9 @@ control status LEDs on the dashbaord.
 Remember to expand the number of outputs and the testing loop value to match the number 
 of timers in use.
 
-The trigger shuld be the top output from the timer, so that thsi check happens
+The trigger should be the top output from the timer, so that this check happens
 if the settings are updated. For older versions of the time scheduler node, the trigger 
-should also be the file read injected into the timer because older node do not send out a new
+should also be the file read injected into the timer because older versions do not send out a new
 setup summary payload for injected settings, only changes made on the dashboard.
 
 No warranties, use at your own risk etc..
