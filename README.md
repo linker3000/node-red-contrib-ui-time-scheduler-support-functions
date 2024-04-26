@@ -51,6 +51,18 @@ Use as follows:
 * The boost on or off function processes the config file, makes changes and these are injected into the timer.
 * The new config is saved back to the target file (see notes above about making sure this happens).
 
+### Enable / Disable Settings
+
+Enable or disable all the settings for every timer. See the function comments for more info
+
+### Enable / Disable Timer
+
+Enable or disable one or more timer outputs (not the settings therein). See the function comments for more info.
+
+### Who's Disabled
+
+Returns true/false values to indicate whether timer outputs are disabled - handy because the timer module does not have an indicator for this.
+
 ### Clear All
 
 This code is designed to be used as the payload for a push button; it loads an empty setup into the node, effectively erasing all timers.
