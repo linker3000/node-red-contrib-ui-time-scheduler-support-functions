@@ -61,7 +61,7 @@ Enable or disable one or more timer outputs (not the settings therein). See the 
 
 ### Who's Disabled
 
-Returns true/false values to indicate whether timer outputs are disabled - handy because the timer module does not have an indicator for this.
+Returns true/false values to indicate whether timer outputs are disabled - handy because the timer module does not have indicators for this.
 
 ### Clear All
 
