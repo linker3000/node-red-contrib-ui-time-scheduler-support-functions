@@ -1,0 +1,56 @@
+/*
+
+Who's Disabled
+
+V1.0 N. Kendrick 25-Apr-2024 (linker3000@gmail.com)
+
+For node-red-contrib-ui-time-scheduler
+
+Read in the current config file and provide a true/false value
+according to whether the timer output is disabled.
+
+Call as: [Trigger] -> [Read config file] ->
+  [This function]
+
+The msg output/s is/are 'true' for disabled timers and can be used, for example, to 
+control status LEDs on the dashbaord.
+
+Remember to expand the number of outputs and the testing loop value to match the number 
+of timers in use.
+
+The trigger shuld be the top output from the timer, so that thsi check happens
+if the settings are updated. For older versions of the time scheduler node, the trigger 
+should also be the file read injected into the timer because older node do not send out a new
+setup summary payload for injected settings, only changes made on the dashboard.
+
+No warranties, use at your own risk etc..
+
+No formal support.
+
+MIT Licence
+
+*/
+
+try {
+    var jsonData = JSON.parse(msg.payload);
+} catch (e) {
+    return null;
+}
+
+// Get the disabledDevices array from the settings object
+const disabledDevices = jsonData.settings.disabledDevices || [];
+
+// Initialize an array to store the output messages
+let outputMessages = [];
+
+// Iterate over each output  ** CHANGEME to match the number of timers in use **
+for (let i = 0; i < 5; i++) {
+    // Check if the output value exists in the disabledDevices array
+    const isDisabled = disabledDevices.includes(i.toString());
+    // Create a new msg object with the true/false state
+    const newMsg = { payload: isDisabled };
+    // Push the msg object to the outputMessages array
+    outputMessages.push(newMsg);
+}
+
+return outputMessages;

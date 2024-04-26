@@ -1,0 +1,66 @@
+/*
+
+Enable Timer
+
+V1.0 N. Kendrick 25-Apr-2024 (linker3000@gmail.com)
+
+For node-red-contrib-ui-time-scheduler
+
+Enable the stated timer number or numbers
+
+Call as: [Trigger with msg.topic = timer #] -> [Read config file] ->
+  [This function]
+
+This means that the function is called with:
+
+msg.topic = timer number
+msg.payload = contents of timer config file
+
+If msg.topic is negative, ALL timers up to that (positive) number are enabled.
+
+No warranties, use at your own risk etc..
+
+No formal support.
+
+MIT Licence
+
+*/
+
+try {
+    var jsonData = JSON.parse(msg.payload);
+} catch (e) {
+    return null;
+}
+
+// Check if the "disabledDevices" object is present, if not, create it
+jsonData.settings.disabledDevices = jsonData.settings.disabledDevices || [];
+
+// Convert msg.topic to a string
+const topicNum = msg.topic.toString();
+
+if (parseInt(topicNum) < 0) {
+    // If msg.topic is negative, enable all outputs up to the absolute value of msg.topic
+    for (let i = 0; i <= Math.abs(parseInt(topicNum)); i++) {
+        const output = i.toString();
+        if (jsonData.settings.disabledDevices.includes(output)) {
+            // Remove reference to the output to enable it
+            const index = jsonData.settings.disabledDevices.indexOf(output);
+            jsonData.settings.disabledDevices.splice(index, 1);
+        }
+    }
+} else {
+    // If msg.topic is non-negative, enable only that output if it exists in the disabledDevices array
+    if (jsonData.settings.disabledDevices.includes(topicNum)) {
+        // Remove reference to the output to enable it
+        const index = jsonData.settings.disabledDevices.indexOf(topicNum);
+        jsonData.settings.disabledDevices.splice(index, 1);
+    }
+}
+
+node.warn('New array is : ' + jsonData.settings.disabledDevices);
+
+// Convert the modified object back to JSON
+msg.payload = JSON.stringify(jsonData);
+
+node.warn(msg.payload);
+return msg;

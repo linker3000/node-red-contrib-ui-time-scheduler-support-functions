@@ -1,0 +1,60 @@
+/*
+
+Disable Timer
+
+V1.0 N. Kendrick 25-Apr-2024 (linker3000@gmail.com)
+
+For node-red-contrib-ui-time-scheduler
+
+Disable the stated timer number or numbers
+
+Call as: [Trigger with msg.topic = timer #] -> [Read config file] ->
+  [This function]
+
+This means that the function is called with:
+
+msg.topic = timer number
+msg.payload = contents of timer config file
+
+If msg.topic is negative, ALL timers up to that number are disabled.
+
+No warranties, use at your own risk etc..
+
+No formal support.
+
+MIT Licence
+
+*/
+
+try {
+  var jsonData = JSON.parse(msg.payload);
+} catch (e) {
+  return [null];
+}
+
+// Check if the "disabledDevices" object is present, if not, create it
+jsonData.settings.disabledDevices = jsonData.settings.disabledDevices || [];
+
+// Convert newValue to string since disabledDevices array contains strings
+var outputNum = msg.topic.toString();
+
+if (outputNum < '0') {
+  for (let i = 0; i <= Math.abs(outputNum); i++) {
+    const output = i.toString();
+    if (!jsonData.settings.disabledDevices.includes(output)) {
+      jsonData.settings.disabledDevices.push(output);
+    }
+  }
+} else {
+  // Add the newValue to the "disabledDevices" array if it's not already present
+  if (!jsonData.settings.disabledDevices.includes(outputNum)) {
+    jsonData.settings.disabledDevices.push(outputNum);
+  }
+}
+
+node.warn('New array is : ' + jsonData.settings.disabledDevices);
+// Convert the modified object back to JSON
+msg.payload = JSON.stringify(jsonData);
+
+node.warn(msg.payload);
+return msg;

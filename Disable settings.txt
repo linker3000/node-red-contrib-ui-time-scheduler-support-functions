@@ -1,0 +1,42 @@
+/*
+
+Disable Settings
+
+V1.0 N. Kendrick 25-Apr-2024 (linker3000@gmail.com)
+
+For node-red-contrib-ui-time-scheduler
+
+Disable all timer settings (not the timers themselves)
+
+Call as: [Trigger with msg.topic = timer #] -> [Read config file] ->
+  [This function]
+
+This means that the function is called with:
+
+msg.topic = timer number
+msg.payload = contents of timer config file
+
+No warranties, use at your own risk etc..
+
+No formal support.
+
+MIT Licence
+
+*/
+
+try {
+    var jsonData = JSON.parse(msg.payload);
+} catch (e) {
+    return null;
+}
+
+// Iterate over each object in the timers array
+jsonData.timers.forEach(item => {
+    // Add the "disabled" key with the value "disabled" to each object
+    item.disabled = "disabled";
+});
+
+// Convert the modified object back to JSON
+msg.payload = JSON.stringify(jsonData);
+
+return msg;
