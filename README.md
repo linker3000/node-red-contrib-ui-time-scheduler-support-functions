@@ -5,6 +5,8 @@ Everything here is offered 'as is' with no claims made about fitness for any spe
 
 Here's some support functions I wrote for the Node-RED timer module *node-red-contrib-ui-time-scheduler*, which can be found here: https://flows.nodered.org/node/node-red-contrib-ui-time-scheduler. These add additional functionality to the timer without any modifications to the core code, so they should be compatible with any changes made by the timer's author.
 
+*Most functions provided here contain further setup notes or info in their comments so do check them out.*
+
 ## Notes
 
 ### Ensuring config changes are saved
