@@ -57,10 +57,7 @@ if (parseInt(topicNum) < 0) {
     }
 }
 
-node.warn('New array is : ' + jsonData.settings.disabledDevices);
-
 // Convert the modified object back to JSON
 msg.payload = JSON.stringify(jsonData);
 
-node.warn(msg.payload);
 return msg;
